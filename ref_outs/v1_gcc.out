@@ -1,0 +1,31 @@
+Cache Settings
+--------------
+L1 (C,B,S): (10,6,1). Replace policy: MIP
+Victim cache entries: 1
+L2 (C,B,S): (15,6,3). Replace policy: LIP. Early Restart: Disabled
+
+Cache Statistics
+----------------
+Reads: 315500
+Writes: 184500
+
+L1 accesses: 500000
+L1 hits: 407045
+L1 misses: 92955
+L1 hit ratio: 0.814
+L1 miss ratio: 0.186
+L1 average access time (AAT): 4.957
+
+Victim Cache hits after L1 miss: 5495
+Victim Cache misses after L1 miss: 87460
+Victim Cache hit ratio: 0.059
+Victim Cache miss ratio: 0.941
+Write-backs from L1 or Victim Cache: 33847
+
+L2 reads: 87460
+L2 writes: 33847
+L2 read hits: 81600
+L2 read misses: 5860
+L2 read hit ratio: 0.933
+L2 read miss ratio: 0.067
+L2 average access time (AAT): 15.760

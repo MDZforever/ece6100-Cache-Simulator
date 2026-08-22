@@ -1,0 +1,9 @@
+{
+    "C_Cpp.errorSquiggles": "enabledIfIncludesResolve",
+    "files.associations": {
+        "*.tcc": "cpp",
+        "deque": "cpp",
+        "vector": "cpp"
+    },
+    "makefile.configureOnOpen": true
+}
