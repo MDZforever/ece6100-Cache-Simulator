@@ -28,7 +28,7 @@ struct Set {
         blocks.resize(num_ways, {0, false, false});
     }
 
-    // Find a block in the set
+    // Find a block in the set, return the index of the block in the set.
     int find_block(uint64_t tag) {
         for (int i = 0; i < num_ways; i++) {
             if (blocks[i].valid && blocks[i].tag == tag) {
@@ -38,7 +38,7 @@ struct Set {
         return -1; // Block not found
     }
 
-    // Handle a cache hit
+    // Handle a cache hit, put the block with a given indwx to MRU position of the lru_list.
     void handle_hit(int index) {
         if (replace_policy == REPLACEMENT_POLICY_MIP || replace_policy == REPLACEMENT_POLICY_LIP) {
             // Move block to MRU position
@@ -48,7 +48,7 @@ struct Set {
     }
 
     // Handle a cache miss
-    // int handle_miss(uint64_t tag) {
+    // Return the inserted block
     Block handle_miss(uint64_t tag) {
         int evict_index = -1;
         if (lru_list.size() == num_ways) {
@@ -61,7 +61,8 @@ struct Set {
                     break;
                 }
             }
-        } else {
+        } 
+        else {
             // Find an invalid block
             for (int i = 0; i < num_ways; i++) {
                 if (!blocks[i].valid) {
@@ -89,9 +90,9 @@ struct Set {
 };
 
 struct Cache {
-    uint64_t num_sets;
-    uint64_t num_ways;
-    uint64_t block_size;
+    uint64_t num_sets;   // 2^(C-B-S)
+    uint64_t num_ways;   // 2^S, block per set
+    uint64_t block_size; // 2^B
     replacement_policy_t replace_policy;
     write_strat_t write_strat;
     bool enabled; // For L2 cache
