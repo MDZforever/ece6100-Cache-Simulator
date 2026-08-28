@@ -14,18 +14,18 @@ L1 hits: 257287
 L1 misses: 242713
 L1 hit ratio: 0.515
 L1 miss ratio: 0.485
-L1 average access time (AAT): 42.434
+L1 average access time (AAT): 36.266
 
-Victim Cache hits after L1 miss: 0
-Victim Cache misses after L1 miss: 242713
+Victim Cache hits after L1 miss: 83
+Victim Cache misses after L1 miss: 242630
 Victim Cache hit ratio: 0.000
 Victim Cache miss ratio: 1.000
-Write-backs from L1 or Victim Cache: 189809
+Write-backs from L1 or Victim Cache: 4894
 
-L2 reads: 242713
-L2 writes: 0
-L2 read hits: 0
-L2 read misses: 242713
-L2 read hit ratio: 0.000
-L2 read miss ratio: 1.000
-L2 average access time (AAT): 497.600
+L2 reads: 242630
+L2 writes: 4894
+L2 read hits: 61257
+L2 read misses: 181373
+L2 read hit ratio: 0.252
+L2 read miss ratio: 0.748
+L2 average access time (AAT): 70.202
