@@ -57,7 +57,9 @@ static int choose_fill_way(Set& set) {
     }
 
     if (set.replace_policy == REPLACEMENT_POLICY_RANDOM) {
-        return evict_random() % set.num_ways;
+        // The last block is the newest insertion and must be protected.
+        // A direct-mapped set has no alternative victim.
+        return set.num_ways == 1 ? 0 : evict_random() % (set.num_ways - 1);
     }
 
     if (set.lru_list.empty()) {
@@ -76,8 +78,16 @@ static int choose_fill_way(Set& set) {
 }
 
 static Block install_block(Set& set, uint64_t tag, bool dirty) {
-    const int fill_way = choose_fill_way(set);
+    int fill_way = choose_fill_way(set);
     const Block evicted_block = set.blocks[fill_way];
+
+    if (set.replace_policy == REPLACEMENT_POLICY_RANDOM) {
+        // Remove the selected way while preserving the order of survivors.
+        // Always append the new block, including when filling an invalid way.
+        std::rotate(set.blocks.begin() + fill_way,
+                    set.blocks.begin() + fill_way + 1, set.blocks.end());
+        fill_way = static_cast<int>(set.num_ways - 1);
+    }
 
     if (evicted_block.valid && set.replace_policy != REPLACEMENT_POLICY_RANDOM) {
         set.lru_list.remove(evicted_block.tag);

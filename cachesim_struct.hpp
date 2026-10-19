@@ -80,13 +80,6 @@ struct Set {
         return blocks[evict_index];
     }
 
-    // Handle random replacement
-    int handle_random_miss(uint64_t tag) {
-        int evict_index = evict_random() % num_ways;
-        blocks[evict_index].tag = tag;
-        blocks[evict_index].valid = true;
-        return evict_index;
-    }
 };
 
 struct Cache {
@@ -133,4 +126,4 @@ struct Cache {
         return victim_cache_entries > 0;
     }
 };
-#endif 
+#endif
